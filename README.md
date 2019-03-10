@@ -1,2 +1,2 @@
 # facebook
-- Create without framework
+- Create without framework, but based on mvc model.
