@@ -24,7 +24,10 @@ class DefaultController extends Controller
 
         $user = User::where('email', $validate['email'])->where('password', $validate['password'])->get();
         if(count($user) > 0){
-            //todo login
+            echo 'true';
+        }
+        else{
+            echo 'false';
         }
     }
 }
