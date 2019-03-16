@@ -10,20 +10,22 @@ class DefaultController extends Controller
 {
     public function home(Request $request)
     {
-        if ($request->session()->get('islogged') !== true) {
+        if ($request->session()->get('islogged') === true) {
+            return view('logged');
+        } else {
             return view('loginform');
         }
     }
 
     public function login(Request $request)
     {
-        $validate = $this->validate($request,[
+        $validate = $this->validate($request, [
             'email' => 'email',
             'password' => 'min:5'
         ]);
 
         $user = User::where('email', $validate['email'])->where('password', $validate['password'])->get();
-        if(count($user) > 0) {
+        if (count($user) > 0) {
             $request->session()->put('islogged', true);
             $request->session()->put('user', $user);
         }
