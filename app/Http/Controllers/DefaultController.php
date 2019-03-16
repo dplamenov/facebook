@@ -23,11 +23,10 @@ class DefaultController extends Controller
         ]);
 
         $user = User::where('email', $validate['email'])->where('password', $validate['password'])->get();
-        if(count($user) > 0){
-            echo 'true';
+        if(count($user) > 0) {
+            $request->session()->put('islogged', true);
+            $request->session()->put('user', $user);
         }
-        else{
-            echo 'false';
-        }
+        return redirect()->route('home');
     }
 }
