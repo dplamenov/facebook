@@ -14,8 +14,11 @@ class DefaultController extends Controller
         }
     }
 
-    public function login()
+    public function login(Request $request)
     {
-
+        $validate = $this->validate($request,[
+            'email' => 'email',
+            'password' => 'min:5'
+        ]);
     }
 }
