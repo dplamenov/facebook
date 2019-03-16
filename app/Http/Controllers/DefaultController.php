@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\User;
 use \Illuminate\Http\Request;
 
 class DefaultController extends Controller
@@ -20,5 +21,10 @@ class DefaultController extends Controller
             'email' => 'email',
             'password' => 'min:5'
         ]);
+
+        $user = User::where('email', $validate['email'])->where('password', $validate['password'])->get();
+        if(count($user) > 0){
+            //todo login
+        }
     }
 }
