@@ -1,6 +1,11 @@
 @extends('layout.layout')
 @section('title', 'Login form')
 @section('content')
+    @if ($errors->any())
+        @foreach($errors->all() as $error)
+            <p>{{$error}}</p>
+        @endforeach
+    @endif
     <form action="{{url('/login')}}" method="post">
         @csrf
         @method('post')
