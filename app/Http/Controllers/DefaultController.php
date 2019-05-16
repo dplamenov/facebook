@@ -11,6 +11,7 @@ class DefaultController extends Controller
     public function logout(Request $request){
         $request->session()->put('islogged', true);
         $request->session()->put('user', null);
+        return redirect()->route('home');
     }
 
     public function home(Request $request)
