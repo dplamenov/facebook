@@ -8,6 +8,11 @@ use \Illuminate\Http\Request;
 
 class DefaultController extends Controller
 {
+    public function logout(Request $request){
+        $request->session()->put('islogged', true);
+        $request->session()->put('user', null);
+    }
+
     public function home(Request $request)
     {
         if ($request->session()->get('islogged') === true) {
