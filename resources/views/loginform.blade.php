@@ -9,15 +9,15 @@
     <form action="{{url('/login')}}" method="post">
         @csrf
         @method('post')
-        <label>
+        <label style="width: 100%">
             Email
-            <input type="text" name="email">
+            <input type="text" name="email" class="form-control" >
         </label>
         <br>
-        <label>
+        <label style="width: 100%">
             Password
-            <input type="password" name="password">
+            <input type="password" name="password" class="form-control">
         </label>
-        <input type="submit"/>
+        <button type="submit">Login</button>
     </form>
 @endsection
