@@ -5,6 +5,7 @@
     <title>@section('title')@show</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/style.css')}}">
+    <script src="{{asset('js/app.js')}}" async defer></script>
 </head>
 
 <body>
