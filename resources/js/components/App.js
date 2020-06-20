@@ -33,6 +33,8 @@ class App extends Component {
                         <Route exact path={location}>
                             {this.state.loggedIn ? <Home /> : <LoginForm/>}
                         </Route>
+
+                        <Route component={notFound} />
                     </Switch>
                 </div>
             </BrowserRouter>
@@ -40,4 +42,8 @@ class App extends Component {
     }
 }
 
-ReactDOM.render(<App/>, document.querySelector('.container'))
+function notFound(){
+    return <div className="notFoundError"><h1>Error: Not found</h1><span>Go to <a onClick={() => {window.location.href = location;}}>home page</a></span></div>
+}
+
+ReactDOM.render(<App/>, document.querySelector('#content'))

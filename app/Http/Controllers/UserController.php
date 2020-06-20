@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DefaultController extends Controller
+class UserController extends Controller
 {
     public function logout(Request $request)
     {
@@ -27,7 +27,7 @@ class DefaultController extends Controller
     {
 
         return response()->json([
-            'islogin' => true
+            'islogin' => $request->session()->get('isLogged') ?? false
         ]);
         //$request->session()->get('isLogged') ?? false
     }

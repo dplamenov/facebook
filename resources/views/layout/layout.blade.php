@@ -11,21 +11,21 @@
 <body>
 <div class="container">
     <div id="header">
-        <h1 style="text-align: center">Logo</h1>
+        <h1 class="title">My social media</h1>
     </div>
     <div id="content">
-        <div class="row">
-            <div class="col-2 left-section">
-                1 of 3
-            </div>
-            <div class="col-8 main-section">
-                @section('content')
-                @show
-            </div>
-            <div class="col-2 right-section">
-                3 of 3
-            </div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="col-2 left-section">--}}
+{{--                1 of 3--}}
+{{--            </div>--}}
+{{--            <div class="col-8 main-section">--}}
+{{--                @section('content')--}}
+{{--                @show--}}
+{{--            </div>--}}
+{{--            <div class="col-2 right-section">--}}
+{{--                3 of 3--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </div>
 </body>
