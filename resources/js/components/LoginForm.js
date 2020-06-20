@@ -1,4 +1,8 @@
 import React, {Component} from 'react'
+import axios from 'axios';
+import config from "./../config";
+
+const location = config.location;
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -16,8 +20,14 @@ export default class LoginForm extends Component {
             return acc;
         }, {});
 
-        console.log(data);
-
+        axios.post(`${location}/api/user/login`, data)
+            .then(function (response) {
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.headers);
+                console.log(response.config);
+            });
     }
 
     render() {

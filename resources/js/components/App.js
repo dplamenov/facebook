@@ -15,14 +15,9 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(`${location}/api/isLogin`)
+        fetch(`${location}/api/user/isLogin`)
             .then(e => e.json())
-            .then(e => this.setState({loggedIn: e.islogin}))
-            .then(_ => {
-                console.log(this.state);
-                console.log(this.state.loggedIn);
-                console.log(this.state.loggedIn === true);
-            });
+            .then(e => this.setState({loggedIn: e.islogin}));
     }
 
     render() {

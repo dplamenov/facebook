@@ -7,21 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function logout(Request $request)
-    {
-
-        $request->session()->put('isLogged', false);
-//
-//        $request->session()->put('islogged', true);
-//        $request->session()->put('user', null);
-//
-//        return redirect()->route('home');
-    }
-
-    public function home(Request $request)
-    {
-        return;
-    }
 
     public function islogin(Request $request)
     {
@@ -35,5 +20,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
 
+
+        return response()->json([1, 5]);
     }
 }
