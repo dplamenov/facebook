@@ -10,7 +10,7 @@ class DefaultController extends Controller
     public function logout(Request $request)
     {
 
-        $request->session()->put('isLogged', true);
+        $request->session()->put('isLogged', false);
 //
 //        $request->session()->put('islogged', true);
 //        $request->session()->put('user', null);
@@ -27,27 +27,13 @@ class DefaultController extends Controller
     {
 
         return response()->json([
-            'islogin' => $request->session()->get('isLogged')
+            'islogin' => true
         ]);
+        //$request->session()->get('isLogged') ?? false
     }
 
     public function login(Request $request)
     {
 
     }
-//
-//    public function login(Request $request)
-//    {
-//        $validate = $this->validate($request, [
-//            'email' => 'email',
-//            'password' => 'min:5'
-//        ]);
-//
-//        $user = User::where('email', $validate['email'])->where('password', $validate['password'])->get();
-//        if (count($user) > 0) {
-//            $request->session()->put('islogged', true);
-//            $request->session()->put('user', $user);
-//        }
-//        return redirect()->route('home');
-//    }
 }
