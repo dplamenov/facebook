@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios';
 import config from "./../config";
+import {Redirect} from 'react-router-dom';
 
 const location = config.location;
 
@@ -22,24 +23,21 @@ export default class LoginForm extends Component {
             acc[current[0]] = current[1];
             return acc;
         }, {});
-
-        console.log(this);
         this.login(data);
     }
 
     login(data) {
         console.log(this);
         axios.post(`${location}/api/user/login`, data)
-            .then(function (response) {
-                console.log(this);
-                console.log(response.data);
-                console.log(response.status);
-                console.log(response.statusText);
-                console.log(response.headers);
-                console.log(response.config);
+            .then(response => {
+                this.setState({errors: Object.assign({}, {})});
+                if(response.data === true){
+                    window.location.reload(false);
+                } else {
+                    this.setState({errors: Object.assign({}, {'user': ['no such that user in database']})});
+                }
             })
             .catch(error => {
-                console.dir(error);
                 this.setState({errors: Object.assign({}, error.response.data)});
             });
     }
@@ -50,14 +48,7 @@ export default class LoginForm extends Component {
 
     render() {
         const errorsOutput = [];
-
-        console.log('in if');
-        console.log(Object.values(this.state.errors));
-        console.log(Object.values(this.state.errors).flat());
         Object.values(this.state.errors).flat().map((e, i) => errorsOutput.push(<li key={i}>{e}</li>));
-
-        console.log(errorsOutput);
-
         return <div>
             <ul>
                 {errorsOutput}

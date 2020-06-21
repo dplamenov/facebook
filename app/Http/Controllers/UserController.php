@@ -23,9 +23,11 @@ class UserController extends Controller
             'password' => 'min:8'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors())->setStatusCode(422);
         }
+
+        Auth::attempt(['username' => $request->get('username'), 'password' => $request->get('password')]);
 
         return response()->json(Auth::check());
     }

@@ -17,10 +17,12 @@ class App extends Component {
     componentDidMount() {
         fetch(`${location}/api/user/isLogin`)
             .then(e => e.json())
-            .then(e => this.setState({loggedIn: e.islogin}));
+            .then(e => this.setState({loggedIn: e}));
     }
 
     render() {
+        console.log('state------:  - ');
+        console.log(this.state)
         return (
             <BrowserRouter>
                 <div>
