@@ -15,7 +15,11 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <p>Hello! You are login.</p>
+                <div id="create-post">
+                    <form>
+                        <input type="text" name='"'/>
+                    </form>
+                </div>
             </div>
         );
     }

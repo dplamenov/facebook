@@ -8,3 +8,4 @@ Route::get('/', function () {
 
 Route::get('/api/user/isLogin', 'UserController@islogin');
 Route::post('/api/user/login', 'UserController@login');
+Route::get('/api/post', 'UserController@login');
