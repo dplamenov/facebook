@@ -37,7 +37,7 @@ export default class Home extends Component {
             console.log(post);
             posts.push(
                 <div className='post'>
-                    <p key={post.id}>{post.content}</p>
+                    <p key={post.id} dangerouslySetInnerHTML={{__html: post.content}}/>
                 </div>
             );
         });

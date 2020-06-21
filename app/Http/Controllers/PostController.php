@@ -39,7 +39,7 @@ class PostController extends Controller
         $post_content = $request->get('postContent');
 
         $post = new Post();
-        $post->content = $post_content;
+        $post->content = ($post_content);
         $post->user_id = Auth::id();
         $post->save();
 
