@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios';
 import config from "./../config";
-import {Redirect} from 'react-router-dom';
 
 const location = config.location;
-
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -47,6 +45,7 @@ export default class LoginForm extends Component {
     }
 
     render() {
+        console.log(Object.values);
         const errorsOutput = [];
         Object.values(this.state.errors).flat().map((e, i) => errorsOutput.push(<li key={i}>{e}</li>));
         return <div>

@@ -14,4 +14,5 @@ require('./bootstrap');
  */
 
 // require('./components/Home');
+
 require('./components/App');

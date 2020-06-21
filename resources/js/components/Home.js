@@ -6,10 +6,14 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {posts: []};
     }
 
     componentDidMount() {
-
+        axios.get(`${location}/api/posts`)
+            .then(response => {
+                console.log(response);
+            });
     }
 
     render() {
