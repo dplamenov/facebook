@@ -20,7 +20,7 @@ export default class Home extends Component {
 
         const channel = window.Echo.channel('my-social-media');
         channel.listen('posts', data => {
-            this.setState({posts:  this.state.posts.concat(data)});
+            this.setState({posts: this.state.posts.concat(data)});
         });
     }
 
@@ -29,11 +29,7 @@ export default class Home extends Component {
         const editor = this.state.editor;
         const data = editor.getData();
 
-        axios.post(`${location}/api/posts`, {postContent: data})
-            .then(response => {
-                console.log(response);
-                this.setState({posts: this.state.posts.concat(response.data)});
-            });
+        axios.post(`${location}/api/posts`, {postContent: data});
     };
 
     render() {
