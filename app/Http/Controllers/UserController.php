@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -30,5 +29,11 @@ class UserController extends Controller
         Auth::attempt(['username' => $request->get('username'), 'password' => $request->get('password')]);
 
         return response()->json(Auth::check());
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json('ok');
     }
 }

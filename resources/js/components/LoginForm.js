@@ -25,7 +25,7 @@ export default class LoginForm extends Component {
     }
 
     login(data) {
-        console.log(this);
+
         axios.post(`${location}/api/user/login`, data)
             .then(response => {
                 this.setState({errors: Object.assign({}, {})});
@@ -45,7 +45,7 @@ export default class LoginForm extends Component {
     }
 
     render() {
-        console.log(Object.values);
+
         const errorsOutput = [];
         Object.values(this.state.errors).flat().map((e, i) => errorsOutput.push(<li key={i}>{e}</li>));
         return <div>

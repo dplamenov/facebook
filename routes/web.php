@@ -1,6 +1,4 @@
 <?php
-
-use App\Events\MyEvent;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,5 +7,6 @@ Route::get('/', function () {
 
 Route::get('/api/user/isLogin', 'UserController@islogin');
 Route::post('/api/user/login', 'UserController@login');
+Route::get('/api/user/logout', 'UserController@logout');
 Route::get('/api/posts', 'PostController@index');
 Route::post('/api/posts', 'PostController@store');

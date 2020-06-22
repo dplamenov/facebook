@@ -21,8 +21,6 @@ class App extends Component {
     }
 
     render() {
-        console.log('state------:  - ');
-        console.log(this.state)
         return (
             <BrowserRouter>
                 <div>

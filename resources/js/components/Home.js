@@ -32,10 +32,17 @@ export default class Home extends Component {
         axios.post(`${location}/api/posts`, {postContent: data});
     };
 
+    logout = e => {
+        e.preventDefault();
+        axios.get(`${location}/api/user/logout`, {})
+            .then(response => {
+                window.location.reload(false);
+            });
+    }
+
     render() {
         const posts = [];
         [...this.state.posts].forEach(post => {
-            console.log(post);
             posts.push(
                 <div className='post'>
                     <p key={post.id} dangerouslySetInnerHTML={{__html: post.content}}/>
@@ -45,6 +52,9 @@ export default class Home extends Component {
 
         return (
             <div>
+                <div id="account">
+                    <a onClick={this.logout}>Logout</a>
+                </div>
                 <div id="create-post">
                     <CKEditor id='postEditor'
                               editor={ClassicEditor}
