@@ -15,12 +15,18 @@ export default class Home extends Component {
     componentDidMount() {
         axios.get(`${location}/api/posts`)
             .then(response => {
-                this.setState({posts: response.data});
+                const posts = Object.values(response.data);
+
+                posts.sort((a, b) => {
+                    return b.id - a.id;
+                })
+
+                this.setState({posts: posts});
             });
 
         const channel = Echo.channel('my-social-media');
         channel.listen('.posts', data => {
-            this.setState({posts: this.state.posts.concat(data)});
+            this.setState({posts: [data].concat(this.state.posts)});
         });
     }
 
