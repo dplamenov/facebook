@@ -17,6 +17,11 @@ export default class Home extends Component {
             .then(response => {
                 this.setState({posts: response.data});
             });
+
+        const channel = window.Echo.channel('my-social-media');
+        channel.listen('posts', data => {
+            this.setState({posts:  this.state.posts.concat(data)});
+        });
     }
 
     post = e => {

@@ -51,3 +51,4 @@ window.Echo = new Echo({
     cluster: 'eu',
     forceTLS: true
 });
+

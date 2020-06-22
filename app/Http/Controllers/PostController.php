@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MyEvent;
+use App\Events\PostCreated;
 use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -42,6 +43,8 @@ class PostController extends Controller
         $post->content = ($post_content);
         $post->user_id = Auth::id();
         $post->save();
+
+        event(new PostCreated($post->id, $post->content));
 
         return response()->json($post);
     }
