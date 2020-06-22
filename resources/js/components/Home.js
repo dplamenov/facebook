@@ -18,8 +18,8 @@ export default class Home extends Component {
                 this.setState({posts: response.data});
             });
 
-        const channel = window.Echo.channel('my-social-media');
-        channel.listen('posts', data => {
+        const channel = Echo.channel('my-social-media');
+        channel.listen('.posts', data => {
             this.setState({posts: this.state.posts.concat(data)});
         });
     }
@@ -48,7 +48,7 @@ export default class Home extends Component {
                 <div id="create-post">
                     <CKEditor id='postEditor'
                               editor={ClassicEditor}
-                              data="<p>Hello from CKEditor 5!</p>"
+                              data='<p>Enter new post your here</p>'
                               onInit={editor => {
                                   this.setState({editor: editor});
                               }}/>
