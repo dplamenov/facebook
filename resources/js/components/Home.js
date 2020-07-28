@@ -9,23 +9,34 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
+        this.currentPageId = 1;
+        this.nextPageUrl = undefined;
         this.state = {posts: [], editor: undefined};
     }
 
-    componentDidMount() {
-        axios.get(`${location}/api/posts`)
+    getPosts(pageId = 1) {
+        return axios.get(`${location}/api/posts?page=${Number(pageId)}`)
             .then(response => {
                 const posts = response.data.data;
-                const nextPageUrl = response.data.next_page_url;
-
-                console.log(nextPageUrl);
+                // this.nextPageUrl = response.data.next_page_url;
+                this.currentPageId = response.data.current_page;
+                // console.log(nextPageUrl);
+                console.log(response.data);
 
                 posts.sort((a, b) => {
                     return b.id - a.id;
                 });
 
-                this.setState({posts: posts});
+                return posts;
             });
+    }
+
+
+    componentDidMount() {
+        this.getPosts().then((posts) => {
+            this.setState({posts: posts});
+        });
+
 
         const channel = Echo.channel('my-social-media');
         channel.listen('.posts', data => {
@@ -47,6 +58,12 @@ export default class Home extends Component {
             .then(response => {
                 window.location.reload(false);
             });
+    };
+
+    nextPage = e => {
+        this.getPosts(this.currentPageId + 1).then((posts) => {
+            this.setState({posts: posts});
+        });
     };
 
     render() {
@@ -78,7 +95,7 @@ export default class Home extends Component {
                     {posts}
 
                     <button className='btn btn-primary'>Prev page</button>
-                    <button className='btn btn-primary'>Next page</button>
+                    <button className='btn btn-primary' onClick={this.nextPage}>Next page</button>
                 </div>
             </div>
         );
