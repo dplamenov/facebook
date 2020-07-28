@@ -68,7 +68,7 @@ export default class Home extends Component {
 
     prevPage = e => {
         this.getPosts(this.currentPageId - 1).then((posts) => {
-           this.setState({posts: posts});
+            this.setState({posts: posts});
         });
     };
 
@@ -99,9 +99,10 @@ export default class Home extends Component {
                 </div>
                 <div id="all-post">
                     {posts}
-
-                    <button className='btn btn-primary' onClick={this.prevPage}>Prev page</button>
-                    <button className='btn btn-primary' onClick={this.nextPage}>Next page</button>
+                    <div className="post-paging-buttons">
+                        <button className='btn btn-primary' onClick={this.prevPage} id="prev">Prev page</button>
+                        <button className='btn btn-primary' onClick={this.nextPage} id="next">Next page</button>
+                    </div>
                 </div>
             </div>
         );

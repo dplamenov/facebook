@@ -15,5 +15,9 @@ h1.title{
     font-size: 2em;
 }
 div.notFoundError{
-    
+
+}
+
+.post-paging-buttons{
+    margin-top: 40px;
 }
