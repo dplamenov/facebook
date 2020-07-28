@@ -66,6 +66,12 @@ export default class Home extends Component {
         });
     };
 
+    prevPage = e => {
+        this.getPosts(this.currentPageId - 1).then((posts) => {
+           this.setState({posts: posts});
+        });
+    };
+
     render() {
         const posts = [];
         console.log([...this.state.posts]);
@@ -94,7 +100,7 @@ export default class Home extends Component {
                 <div id="all-post">
                     {posts}
 
-                    <button className='btn btn-primary'>Prev page</button>
+                    <button className='btn btn-primary' onClick={this.prevPage}>Prev page</button>
                     <button className='btn btn-primary' onClick={this.nextPage}>Next page</button>
                 </div>
             </div>
