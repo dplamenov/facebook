@@ -15,11 +15,14 @@ export default class Home extends Component {
     componentDidMount() {
         axios.get(`${location}/api/posts`)
             .then(response => {
-                const posts = Object.values(response.data);
+                const posts = response.data.data;
+                const nextPageUrl = response.data.next_page_url;
+
+                console.log(nextPageUrl);
 
                 posts.sort((a, b) => {
                     return b.id - a.id;
-                })
+                });
 
                 this.setState({posts: posts});
             });
@@ -44,14 +47,15 @@ export default class Home extends Component {
             .then(response => {
                 window.location.reload(false);
             });
-    }
+    };
 
     render() {
         const posts = [];
+        console.log([...this.state.posts]);
         [...this.state.posts].forEach(post => {
             posts.push(
-                <div className='post'>
-                    <p key={post.id} dangerouslySetInnerHTML={{__html: post.content}}/>
+                <div className='post' key={post.id}>
+                    <p dangerouslySetInnerHTML={{__html: post.content}}/>
                 </div>
             );
         });
@@ -72,6 +76,9 @@ export default class Home extends Component {
                 </div>
                 <div id="all-post">
                     {posts}
+
+                    <button className='btn btn-primary'>Prev page</button>
+                    <button className='btn btn-primary'>Next page</button>
                 </div>
             </div>
         );

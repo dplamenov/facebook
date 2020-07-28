@@ -22,10 +22,9 @@ export default class LoginForm extends Component {
             return acc;
         }, {});
         this.login(data);
-    }
+    };
 
     login(data) {
-
         axios.post(`${location}/api/user/login`, data)
             .then(response => {
                 this.setState({errors: Object.assign({}, {})});

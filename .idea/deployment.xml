@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="fb" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="fujitsu">
     <serverData>
-      <paths name="fb">
+      <paths name="fujitsu">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="fujitsu">
+      <paths name="mangafiend">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
