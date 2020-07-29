@@ -15,7 +15,13 @@ export default class Home extends Component {
 
         this.postButton = React.createRef();
 
-        this.state = {posts: [], editor: undefined, isPostButtonDisabled: true};
+        this.state = {
+            posts: [],
+            editor: undefined,
+            isPostButtonDisabled: true,
+            isPrevButtonDisabled: false,
+            isNextButtonDisabled: false
+        };
     }
 
     getPosts(pageId = 1) {
@@ -23,6 +29,19 @@ export default class Home extends Component {
             .then(response => {
                 const posts = response.data.data;
                 this.currentPageId = response.data.current_page;
+                this.lastPage = response.data.last_page;
+
+                if (this.currentPageId === this.lastPage) {
+                    this.setState({isNextButtonDisabled: true});
+                } else {
+                    this.setState({isNextButtonDisabled: false});
+                }
+
+                if (1 === this.currentPageId) {
+                    this.setState({isPrevButtonDisabled: true});
+                } else {
+                    this.setState({isPrevButtonDisabled: false});
+                }
 
                 return posts;
             });
@@ -84,6 +103,7 @@ export default class Home extends Component {
         return (
             <div>
                 <div id="account">
+                    <a href="">Your profile</a>
                     <a onClick={this.logout}>Logout</a>
                 </div>
                 <div id="create-post">
@@ -94,10 +114,8 @@ export default class Home extends Component {
                                   this.setState({editor: editor});
                               }}
                               onChange={(event, editor) => {
-                                  // const btn = this.postButton.current;
                                   const data = editor.getData();
                                   this.setState({isPostButtonDisabled: data.length <= 0});
-                                  // this.isPostButtonDisabled = data.length <= 0;
                               }}/>
                     <button className='btn btn-primary' onClick={this.post}
                             disabled={this.state.isPostButtonDisabled}>Post
@@ -106,8 +124,12 @@ export default class Home extends Component {
                 <div id="all-post">
                     {posts}
                     <div className="post-paging-buttons">
-                        <button className='btn btn-primary' onClick={this.prevPage} id="prev">Prev page</button>
-                        <button className='btn btn-primary' onClick={this.nextPage} id="next">Next page</button>
+                        <button className='btn btn-primary' onClick={this.prevPage} id="prev" style={{float: 'left'}}
+                                hidden={this.state.isPrevButtonDisabled}>Prev page
+                        </button>
+                        <button className='btn btn-primary' onClick={this.nextPage} id="next" style={{float: 'right'}}
+                                hidden={this.state.isNextButtonDisabled}>Next page
+                        </button>
                     </div>
                 </div>
             </div>
