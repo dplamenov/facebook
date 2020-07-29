@@ -53,7 +53,7 @@ export default class LoginForm extends Component {
             </ul>
             <form method="post" onSubmit={this.submit}>
                 <input type="text" id="username" name="username" className="form-control"/>
-                <input type="text" id="password" name="password" className="form-control"/>
+                <input type="password" id="password" name="password" className="form-control"/>
                 <button className="btn btn-primary">Login</button>
             </form>
         </div>
