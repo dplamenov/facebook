@@ -9,12 +9,13 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
+        // this.isPostButtonDisabled = true;
         this.currentPageId = 1;
         this.nextPageUrl = undefined;
 
         this.postButton = React.createRef();
 
-        this.state = {posts: [], editor: undefined};
+        this.state = {posts: [], editor: undefined, isPostButtonDisabled: true};
     }
 
     getPosts(pageId = 1) {
@@ -22,10 +23,6 @@ export default class Home extends Component {
             .then(response => {
                 const posts = response.data.data;
                 this.currentPageId = response.data.current_page;
-
-                posts.sort((a, b) => {
-                    return b.id - a.id;
-                });
 
                 return posts;
             });
@@ -48,6 +45,7 @@ export default class Home extends Component {
         e.preventDefault();
         const editor = this.state.editor;
         const data = editor.getData();
+        console.log(data);
 
         axios.post(`${location}/api/posts`, {postContent: data});
     };
@@ -56,7 +54,7 @@ export default class Home extends Component {
         e.preventDefault();
         axios.get(`${location}/api/user/logout`, {})
             .then(response => {
-                window.location.reload(false);
+                window.location.href = '';
             });
     };
 
@@ -96,17 +94,14 @@ export default class Home extends Component {
                                   this.setState({editor: editor});
                               }}
                               onChange={(event, editor) => {
-                                  const btn = this.postButton.current;
+                                  // const btn = this.postButton.current;
                                   const data = editor.getData();
-
-                                  if (data.length > 0) {
-                                      btn.removeAttribute('disabled');
-                                  } else {
-                                      btn.setAttribute('disabled', true);
-                                  }
-
+                                  this.setState({isPostButtonDisabled: data.length <= 0});
+                                  // this.isPostButtonDisabled = data.length <= 0;
                               }}/>
-                    <button className='btn btn-primary' onClick={this.post} ref={this.postButton} disabled>Post</button>
+                    <button className='btn btn-primary' onClick={this.post}
+                            disabled={this.state.isPostButtonDisabled}>Post
+                    </button>
                 </div>
                 <div id="all-post">
                     {posts}
