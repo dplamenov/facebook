@@ -11,6 +11,9 @@ export default class Home extends Component {
         super(props);
         this.currentPageId = 1;
         this.nextPageUrl = undefined;
+
+        this.postButton = React.createRef();
+
         this.state = {posts: [], editor: undefined};
     }
 
@@ -18,10 +21,7 @@ export default class Home extends Component {
         return axios.get(`${location}/api/posts?page=${Number(pageId)}`)
             .then(response => {
                 const posts = response.data.data;
-                // this.nextPageUrl = response.data.next_page_url;
                 this.currentPageId = response.data.current_page;
-                // console.log(nextPageUrl);
-                console.log(response.data);
 
                 posts.sort((a, b) => {
                     return b.id - a.id;
@@ -91,11 +91,22 @@ export default class Home extends Component {
                 <div id="create-post">
                     <CKEditor id='postEditor'
                               editor={ClassicEditor}
-                              data='<p>Enter new post your here</p>'
+                              config={{placeholder: 'Enter new post your here'}}
                               onInit={editor => {
                                   this.setState({editor: editor});
+                              }}
+                              onChange={(event, editor) => {
+                                  const btn = this.postButton.current;
+                                  const data = editor.getData();
+
+                                  if (data.length > 0) {
+                                      btn.removeAttribute('disabled');
+                                  } else {
+                                      btn.setAttribute('disabled', true);
+                                  }
+
                               }}/>
-                    <button className='btn btn-primary' onClick={this.post}>Post</button>
+                    <button className='btn btn-primary' onClick={this.post} ref={this.postButton} disabled>Post</button>
                 </div>
                 <div id="all-post">
                     {posts}
